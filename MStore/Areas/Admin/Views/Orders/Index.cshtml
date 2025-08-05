@@ -1,0 +1,86 @@
+﻿@model List<Order>
+
+@{
+    ViewData["title"] = "Orders List";
+}
+
+<h3 class="text-center mt-5">📦 Orders Overview</h3>
+
+@{
+    int index = 1;
+}
+
+<div class="table-responsive mt-5">
+    <table class="table table-hover table-bordered shadow-sm rounded overflow-hidden">
+        <thead class="table-light text-center align-middle">
+            <tr class="fw-semibold text-uppercase">
+                <th>#</th>
+                <th>Client</th>
+                <th>Units</th>
+                <th>Total</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Order</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody class="text-center align-middle">
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="8" class="text-muted text-center py-4">
+                        No orders found.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td>@(order.Client.FirstName + " " + order.Client.LastName)</td>
+                        <td>@order.Items.Sum(i => i.Quantity)</td>
+                        <td class="text-success fw-semibold">@order.TotalAmount$</td>
+                        <td>
+                            <span class="badge bg-secondary">@order.paymentMethod</span>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill @order.paymentStatus.ToString().GetPaymentBadge() px-3 py-2">
+                                @order.paymentStatus
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill @order.orderStatus.ToString().GetOrderBadge() px-3 py-2">
+                                @order.orderStatus
+                            </span>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">
+                                <i class="bi bi-eye"></i> View
+                            </a>
+                        </td>
+                    </tr>
+                    index++;
+                }
+            }
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                string active = (i == ViewBag.PageNumber) ? "active" : "";
+                <li class="page-item @active">
+                    <a class="page-link" asp-route-pageNumber="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+</div>
+
+
+

@@ -1,0 +1,26 @@
+﻿@model string
+
+
+@* <form class="row g-3 ms-3 mb-3" method="get">   
+    <div class="col-lg-6 col-md-12 d-flex">
+
+        <input class="form-control me-2" name="search" type="search" placeholder="Search by Name" value="@Model" />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+
+        <a asp-action="Index" class="btn btn-outline-secondary ms-1">
+            <i class="bi bi-arrow-clockwise"></i>
+        </a>
+    </div>
+</form> *@
+
+<form class="d-flex align-items-center" role="search" method="get">
+    <input class="form-control me-2 form-control" name="search" value="@Model" type="search" placeholder="Search" aria-label="Search" required />
+
+                <button class="btn btn-outline-success btn" type="submit">
+                    Search
+                </button>
+
+                <a asp-action="Index" class="btn btn-outline-secondary btn ms-1">
+                    <i class="bi bi-arrow-clockwise"></i>
+                </a>
+</form>

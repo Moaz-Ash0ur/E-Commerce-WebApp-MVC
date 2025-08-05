@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1 class="text-center mb-5">Categories</h1>
+
+<div class="card shadow-sm border-0">
+
+    <div class="row mb-5">
+
+        <div class="col m-3">
+            <a class="btn btn-primary" href="/Admin/Category/Create">
+                <i class="bi bi-plus-circle"></i> Add New Category
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="card-body">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning">No categories found.</div>
+        }
+        else
+        {
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 10%">#</th>
+                        <th style="width: 30%">Name</th>
+                        <th style="width: 20%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model)
+                    {
+                        <tr>
+                            <td>@category.Id</td>
+                            <td>@category.Name</td>
+                            <td>
+                                <a class="btn btn-sm btn-warning" href="/Admin/Category/Edit/@category.Id">Edit</a>
+                                <a class="btn btn-sm btn-danger" href="/Admin/Category/Delete/@category.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

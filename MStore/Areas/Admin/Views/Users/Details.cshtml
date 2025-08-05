@@ -1,0 +1,105 @@
+﻿@model UserViewModel
+
+@{
+
+}
+
+<div class="container mt-5">
+    <div class="card shadow border-0 mx-auto" style="max-width: 720px; border-radius: 1.25rem;">
+        <div class="card-header bg-gradient bg-primary text-white rounded-top d-flex justify-content-between align-items-center py-3 px-4">
+            <div>
+                <h4 class="mb-0 fw-bold"><i class="bi bi-person-circle me-2"></i>User Profile</h4>
+                <small class="text-light">@Model.Email</small>
+            </div>
+            <span class="badge rounded-pill bg-light text-dark px-3 py-2">@Model.Email</span>
+        </div>
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                <strong>@TempData["ErrorMessage"]</strong>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+        }
+        else if (TempData["SuccessMessage"] != null)
+        {
+            <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                <strong>@TempData["SuccessMessage"]</strong>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+        }
+
+
+        <div class="card-body px-4 py-4">
+            <dl class="row align-items-center">
+                <dt class="col-sm-4 text-muted"><i class="bi bi-person-fill me-2"></i>First Name</dt>
+                <dd class="col-sm-8">@Model.FirstName</dd>
+
+                <dt class="col-sm-4 text-muted"><i class="bi bi-person-fill me-2"></i>Last Name</dt>
+                <dd class="col-sm-8">@Model.LastName</dd>
+
+                <dt class="col-sm-4 text-muted"><i class="bi bi-telephone-fill me-2"></i>Phone</dt>
+                <dd class="col-sm-8">@Model.Phone</dd>
+
+                <dt class="col-sm-4 text-muted"><i class="bi bi-geo-alt-fill me-2"></i>Address</dt>
+                <dd class="col-sm-8">@Model.Address</dd>
+
+                <dt class="col-sm-4 text-muted"><i class="bi bi-person-badge-fill me-2"></i>Role</dt>
+                <dd class="col-sm-8 d-flex align-items-center">
+
+                    @{
+                        var roleColor = Model.Roles.GetRoleBadge();
+                        var rolesStr = string.Join(", ", Model.Roles);
+                    }
+                    <p class="badge rounded-pill @roleColor px-3 py-2">@rolesStr</p>
+                  
+                </dd>
+
+                <dt class="col-sm-4 text-muted"><i class="bi bi-calendar-check-fill me-2"></i>Created At</dt>
+                <dd class="col-sm-8">@Model.CreatedAt.ToString("dd MMM yyyy, hh:mm tt")</dd>
+            </dl>
+        </div>
+
+        <div class="card-footer bg-light rounded-bottom px-4 py-3 d-flex justify-content-between">
+            <a class="btn btn-outline-primary" asp-controller="Users" asp-action="Index">
+                <i class="bi bi-arrow-left-circle-fill me-1"></i> Back
+            </a>
+
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <i class="bi bi-trash-fill me-1"></i> Delete
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal for delete -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete User Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <p>Are you sure you want to delete this user account?</p>
+
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-danger" role="button" asp-controller="Users" asp-action="Delete"
+                   asp-route-id="@Model.Id">Delete</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

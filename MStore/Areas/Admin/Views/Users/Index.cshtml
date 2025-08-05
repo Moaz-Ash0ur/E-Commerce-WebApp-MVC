@@ -1,0 +1,65 @@
+﻿@model List<ApplicationUser>
+
+@{
+
+}
+
+<h1 class="text-center mb-5 display-6 fw-bold text-primary">👤 List of Users</h1>
+
+<div class="container">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white py-3 px-4 d-flex justify-content-between align-items-center rounded-top-4">
+            <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i> User Management</h5>
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped align-middle mb-0">
+                <thead class="table-light">
+                    <tr class="text-center">
+                        <th style="width: 50px;">#</th>
+                        <th><i class="bi bi-person"></i> Name</th>
+                        <th><i class="bi bi-envelope"></i> Email</th>
+                        <th><i class="bi bi-telephone"></i> Phone</th>
+                        <th><i class="bi bi-calendar3"></i> Created At</th>
+                        <th style="width: 200px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int index = 1;
+                    }
+                    @foreach (var user in Model)
+                    {
+                        <tr class="text-center">
+                            <td>@index</td>
+                            <td>@(user.FirstName + " " + user.LastName)</td>
+                            <td>@user.Email</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>@user.CreatedAt.ToString("dd MMM yyyy")</td>
+                            <td>
+                                <a class="btn btn-sm btn-outline-primary me-1"
+                                   asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">
+                                    <i class="bi bi-eye"></i> View
+                                </a>
+                            
+                            </td>
+                        </tr>
+                        index++;
+                    }
+                </tbody>
+            </table>
+
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        string active = (i == ViewBag.PageNumber) ? "active" : "";
+                        <li class="page-item @active">
+                            <a class="page-link px-3 py-2" asp-route-pageNumber="@i">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@using MStore.Utlities
+@model List<Order>
+
+@{
+
+
+
+}
+
+<h2 class="text-center my-4 fw-bold">🛍️ My Orders</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var order in Model)
+        {
+            <div class="col">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <h5 class="card-title text-primary">Order #@order.Id</h5>
+                            <small class="text-muted">@order.CreatedAt.ToString("dd MMM yyyy hh:mm tt")</small>
+                        </div>
+
+                        <p class="mb-1">
+                            <strong>Quantity:</strong> @order.Items.Sum(i => i.Quantity)
+                        </p>
+                        <p class="mb-1 text-success fw-semibold">
+                            <strong>Total:</strong> @order.TotalAmount.ToString("C")
+                        </p>
+                       
+                        <p class="mb-1">
+                            <strong>Payment Status:</strong>
+                            <span class="badge rounded-pill @order.paymentStatus.ToString().GetPaymentBadge() px-3">
+                                @order.paymentStatus
+                            </span>
+                        </p>
+
+                        <p class="mb-3">
+                            <strong>Order Status:</strong>
+                            <span class="badge rounded-pill @order.orderStatus.ToString().GetOrderBadge() px-3">
+                                @order.orderStatus
+                            </span>
+                        </p>
+
+                        <a class="btn btn-sm btn-outline-primary w-100"
+                           asp-controller="ClientOrders"
+                           asp-action="Details"
+                           asp-route-id="@order.Id">
+                            <i class="bi bi-eye"></i> View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="text-center my-5 text-muted">
+        <i class="bi bi-cart-x display-4 d-block mb-3"></i>
+        <h4>You have no orders yet.</h4>
+        <p>Start shopping and your orders will appear here.</p>
+    </div>
+}
+
+
+
+
+<nav>
+    <ul class="pagination">
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            string active = (i == ViewBag.pageNumber) ? "active" : "";
+
+            <li class="page-item @active">
+                <a class="page-link" asp-route-pageNumber=@i>@i</a>
+            </li>
+        }
+    </ul>
+</nav>

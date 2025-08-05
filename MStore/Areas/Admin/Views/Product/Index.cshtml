@@ -1,0 +1,124 @@
+﻿@model IEnumerable<ProductDetailsVM>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1 class="text-center mb-5">List Of Products</h1>
+
+<div class="card shadow-sm border-0">
+
+    <div class="row mb-5">
+
+        <div class="col m-3">
+            <a class="btn btn-primary" href="/Admin/Product/Create">
+                <i class="bi bi-plus-circle"></i> Add New Product
+            </a>
+        </div>
+
+
+        <div class="col m-3">
+
+            @await Html.PartialAsync("_Search", (string)ViewBag.ValueSearch)
+
+        </div>
+
+</div>
+
+
+
+    <div class="card-body">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning">No products found.</div>
+        }
+        else
+        {
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th style="width: 150px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="TbBody">
+                    @await Html.PartialAsync("_ProductTablePartial", Model)
+                </tbody>
+            </table>
+
+            <nav>
+                <ul class="pagination">
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        string active = (i == ViewBag.PageNumber) ? "active" : "";
+                        <li class="page-item @active">
+                            <a class="page-link" href="#" onclick="loadPage(@i); return false;" data-page="@i">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+
+         
+
+        }
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        function confirmDelete(element) {
+            const productId = element.getAttribute("data-id");
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This action cannot be undone!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                   window.location.href = `/Admin/Product/Delete?ProductID=${productId}`;
+                        }
+            });
+        }
+
+        function loadPage(pageNumber) {
+            fetch(`/admin/Product?pageNumber=${pageNumber}`, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('TbBody').innerHTML = html;
+
+              document.querySelectorAll('.pagination .page-item').forEach(el => {
+                   el.classList.remove('active');
+               });
+
+             const currentBtn = document.querySelector(`.pagination a[data-page='${pageNumber}']`);
+             if (currentBtn) {
+                 currentBtn.parentElement.classList.add('active');
+               }
+
+
+            })
+            .catch(error => console.error("Error loading page:", error));
+        }
+
+ </script>
+
+
+
+
+}

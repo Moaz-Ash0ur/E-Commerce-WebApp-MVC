@@ -1,0 +1,104 @@
+﻿@using MStore.Properties
+@using MStore.Utlities
+@model Order
+
+@{
+    decimal subtotal = Model.Items.Sum(i => i.UnitPrice * i.Quantity);
+    decimal shippingFee = Model.ShippingFee;
+    string paymentBadgeColor = Model.paymentStatus.ToString().GetPaymentBadge();
+    string orderBadgeColor = Model.orderStatus.ToString().GetOrderBadge();
+}
+
+<h2 class="text-center my-4 fw-bold">📦 Order Details</h2>
+
+<div class="d-flex justify-content-between mb-4">
+    <a class="btn btn-outline-secondary" asp-controller="ClientOrders" asp-action="Index">
+        ← Back to My Orders
+    </a>
+
+    <!-- زر تحميل الفاتورة PDF -->
+    <a class="btn btn-outline-success" asp-controller="ClientOrders" asp-action="DownloadInvoice" asp-route-id="@Model.Id" target="_blank">
+        <i class="bi bi-download"></i> Download Invoice (PDF)
+    </a>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white fw-semibold">
+                🧾 Order Information
+            </div>
+            <div class="card-body">
+                <div class="mb-2"><strong>Order ID:</strong> @Model.Id</div>
+                <div class="mb-2"><strong>Delivery Address:</strong> @Model.DeliveryAddress</div>
+                <div class="mb-2"><strong>Payment Method:</strong> @Model.paymentMethod</div>
+                <div class="mb-2">
+                    <strong>Payment Status:</strong>
+                    <span class="badge rounded-pill @paymentBadgeColor px-3">@Model.paymentStatus</span>
+                </div>
+                <div class="mb-2">
+                    <strong>Order Status:</strong>
+                    <span class="badge rounded-pill @orderBadgeColor px-3">@Model.orderStatus</span>
+                </div>
+                <div><strong>Order Date:</strong> @Model.CreatedAt.ToString("dd MMM yyyy - hh:mm tt")</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="my-4">🛍️ Order Items</h4>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle shadow-sm text-center">
+        <thead class="table-light">
+            <tr>
+                <th style="width: 100px">Image</th>
+                <th>Description</th>
+                <th style="width: 100px">Quantity</th>
+                <th style="width: 120px">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/products/@item.Product.ImageName" class="rounded" style="width: 80px;" />
+                    </td>
+                    <td class="text-start">
+                        <h5 class="mb-1">
+                            <a asp-controller="Store" asp-action="Details" asp-route-id="@item.Product.Id"
+                               class="text-decoration-none text-dark">
+                                @item.Product.Name
+                            </a>
+                        </h5>
+                        <small>@item.UnitPrice.ToString("0.00") $</small>
+                    </td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.UnitPrice* item.Quantity)$</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Order Summary -->
+<div class="row mt-2">
+    <div class="col-md-4 ms-auto">
+        <div class="border rounded p-3 shadow-sm bg-light">
+            <div class="d-flex justify-content-between mb-2">
+                <span class="fw-semibold">Subtotal:</span>
+                <span>@subtotal.ToString("0.00") $</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span class="fw-semibold">Shipping Fee:</span>
+                <span>@shippingFee.ToString("0.00") $</span>
+            </div>
+            <hr />
+            <div class="d-flex justify-content-between fs-5">
+                <span class="fw-bold">Total:</span>
+                <span class="fw-bold text-success">@((subtotal + shippingFee).ToString("0.00")) $</span>
+            </div>
+        </div>
+    </div>
+</div>

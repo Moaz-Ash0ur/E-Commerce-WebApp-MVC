@@ -1,0 +1,85 @@
+﻿@model RegisterViewModel
+@{
+
+}
+
+<div class="row justify-content-center mt-5 mb-5">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow rounded-4 border-0">
+            <div class="card-body p-4 bg-light">
+                <h3 class="text-center text-primary mb-4">Create Account</h3>
+                <hr class="mb-4" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                <form method="post">
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label class="form-label">First Name *</label>
+                        <input class="form-control" asp-for="FirstName" placeholder="Enter your first name">
+                        <span asp-validation-for="FirstName" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="mb-3">
+                        <label class="form-label">Last Name *</label>
+                        <input class="form-control" asp-for="LastName" placeholder="Enter your last name">
+                        <span asp-validation-for="LastName" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-control" asp-for="Email" placeholder="you@example.com">
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="mb-3">
+                        <label class="form-label">Phone (optional)</label>
+                        <input class="form-control" asp-for="PhoneNumber" placeholder="Your phone number">
+                        <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="mb-3">
+                        <label class="form-label">Address *</label>
+                        <input class="form-control" asp-for="Address" placeholder="Your address">
+                        <span asp-validation-for="Address" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label class="form-label">Password *</label>
+                        <input type="password" class="form-control" asp-for="Password" placeholder="Password">
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="mb-4">
+                        <label class="form-label">Confirm Password *</label>
+                        <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Re-enter password">
+                        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="bi bi-person-plus-fill"></i> Register
+                        </button>
+                        <a class="btn btn-outline-secondary px-4" asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

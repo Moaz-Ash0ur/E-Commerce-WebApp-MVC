@@ -1,0 +1,12 @@
+C:\Users\hp\source\repos\ECommerceStore.Entities\bin\Debug\net8.0\ECommerceStore.Entities.deps.json
+C:\Users\hp\source\repos\ECommerceStore.Entities\bin\Debug\net8.0\ECommerceStore.Entities.dll
+C:\Users\hp\source\repos\ECommerceStore.Entities\bin\Debug\net8.0\ECommerceStore.Entities.pdb
+C:\Users\hp\source\repos\ECommerceStore.Entities\obj\Debug\net8.0\ECommerceStore.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\source\repos\ECommerceStore.Entities\obj\Debug\net8.0\ECommerceStore.Entities.AssemblyInfoInputs.cache
+C:\Users\hp\source\repos\ECommerceStore.Entities\obj\Debug\net8.0\ECommerceStore.Entities.AssemblyInfo.cs
+C:\Users\hp\source\repos\ECommerceStore.Entities\obj\Debug\net8.0\ECommerceStore.Entities.csproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\ECommerceStore.Entities\obj\Debug\net8.0\ECommerceStore.Entities.dll
+C:\Users\hp\source\repos\ECommerceStore.Entities\obj\Debug\net8.0\refint\ECommerceStore.Entities.dll
+C:\Users\hp\source\repos\ECommerceStore.Entities\obj\Debug\net8.0\ECommerceStore.Entities.pdb
+C:\Users\hp\source\repos\ECommerceStore.Entities\obj\Debug\net8.0\ref\ECommerceStore.Entities.dll
+C:\Users\hp\source\repos\ECommerceStore.Entities\obj\Debug\net8.0\ECommerceStore.Entities.csproj.AssemblyReference.cache

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ProductDetailsVM>
+
+@foreach (var product in Model)
+{
+    <tr>
+        <td>@product.ProductID</td>
+        <td>@product.Name</td>
+        <td>@product.Brand</td>
+        <td>@product.Category</td>
+        <td>$@product.Price</td>
+        <td>
+            @if (!string.IsNullOrEmpty(product.Image))
+            {
+                <img src="~/images/products/@product.Image" width="100" class="img-thumbnail" />
+            }
+            else
+            {
+                <span class="text-muted">No image</span>
+            }
+        </td>
+
+        <td>
+            <a class="btn btn-sm btn-warning" asp-controller="Product" asp-action="Edit" asp-route-ProductID="@product.ProductID">Edit</a>
+
+            <a href="javascript:void(0);" class="btn btn-sm btn-danger"
+               data-id="@product.ProductID"
+               onclick="confirmDelete(this)">
+                Delete
+            </a>
+
+
+        </td>
+    </tr>
+}

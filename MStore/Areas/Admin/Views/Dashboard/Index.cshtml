@@ -1,0 +1,121 @@
+﻿@using MStore.Areas.Admin.Models
+@model DashboardVM
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+<div class="container-xl my-5">
+
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-white" style="background: linear-gradient(135deg, #0d6efd, #3a7afe);">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="text-uppercase opacity-75">Total Products</h6>
+                        <h3 class="fw-bold">@Model.TotalProducts</h3>
+                    </div>
+                    <i class="fas fa-box fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-white" style="background: linear-gradient(135deg, #198754, #33cc99);">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="text-uppercase opacity-75">Total Orders</h6>
+                        <h3 class="fw-bold">@Model.TotalOrders</h3>
+                    </div>
+                    <i class="fas fa-shopping-cart fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-white" style="background: linear-gradient(135deg, #ffc107, #ffdd57);">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="text-uppercase opacity-75">Total Users</h6>
+                        <h3 class="fw-bold">@Model.TotalUsers</h3>
+                    </div>
+                    <i class="fas fa-users fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-white" style="background: linear-gradient(135deg, #dc3545, #ff6b6b);">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="text-uppercase opacity-75">Total Sales</h6>
+                        <h3 class="fw-bold">$@Model.TotalSales.ToString("0.00")</h3>
+                    </div>
+                    <i class="fas fa-dollar-sign fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-5 shadow-sm border-0">
+        <div class="card-header bg-white fw-bold text-primary border-0">
+            <i class="fas fa-chart-line me-2"></i> Sales - Last 7 Days
+        </div>
+        <div class="card-body">
+            <canvas id="salesChart" height="120"></canvas>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('salesChart').getContext('2d');
+
+        const salesChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Model.SalesDates)),
+                datasets: [{
+                    label: 'Sales ($)',
+                    data: @Html.Raw(Json.Serialize(Model.SalesTotals)),
+                    fill: true,
+                    backgroundColor: 'rgba(13,110,253,0.1)',
+                    borderColor: '#0d6efd',
+                    tension: 0.4,
+                    pointBackgroundColor: '#0d6efd'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.y.toFixed(2);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

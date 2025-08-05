@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Thank You!";
+}
+
+<div class="container d-flex flex-column align-items-center justify-content-center mt-5" style="min-height: 70vh;">
+    <div class="card shadow p-4 text-center" style="max-width: 600px; width: 100%;">
+        <h2 class="text-success mb-3">🎉 Thank You for Your Order!</h2>
+        <p class="lead">We’ve received your order successfully and will contact you shortly to confirm the delivery.</p>
+
+        <div class="mt-4">
+            <p class="mb-1">🧾 <strong>Order ID:</strong></p>
+            <h4 class="text-primary">@ViewBag.OrderId</h4>
+        </div>
+
+        <a href="/" class="btn btn-primary mt-4 px-4">
+            ⬅️ Return to Home Page
+        </a>
+    </div>
+</div>
+

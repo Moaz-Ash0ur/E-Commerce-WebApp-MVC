@@ -1,0 +1,188 @@
+﻿@using MStore.Properties
+@model Order
+
+@{
+    var subtotal = Model.Items.Sum(i => i.Quantity * i.UnitPrice);//get the all item totalPrice for current order
+    var shippingFee = Convert.ToDecimal(ResGeneral.ShippingFee);
+
+}
+
+<h2 class="text-center my-4">📦 Order Details</h2>
+
+<a class="btn btn-outline-secondary mb-3" asp-controller="Orders" asp-action="Index">← Back to Orders</a>
+
+<div class="row g-4">
+    <!-- Order Info -->
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">🧾 Order Info</div>
+            <div class="card-body">
+                <p><strong>Order ID:</strong> @Model.Id</p>
+                <p><strong>Address:</strong> @Model.DeliveryAddress</p>
+                <p>
+                    <strong>Payment Status:</strong>
+                    <span class="badge @Model.paymentStatus.ToString().GetPaymentBadge()">@Model.paymentStatus.ToString()</span>
+                    <a href="#" class="mx-2" data-bs-toggle="modal" data-bs-target="#paymentStatusModal">
+                        Edit
+                    </a>
+                </p>
+                <p>
+                    <strong>Status:</strong>
+                    <span class="badge @Model.orderStatus.ToString().GetOrderBadge()">@Model.orderStatus.ToString()</span>
+                    <a href="#" class="ms-2" data-bs-toggle="modal" data-bs-target="#orderStatusModal">
+                        Edit
+                    </a>
+                </p>
+                <p><strong>Created At:</strong> @Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Info -->
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">👤 Client Info</div>
+            <div class="card-body">
+                <p><strong>Name:</strong> @Model.Client.FirstName @Model.Client.LastName</p>
+                <p><strong>Email:</strong> @Model.Client.Email</p>
+                <p><strong>Phone:</strong> @Model.Client.PhoneNumber</p>
+                <p><strong>Address:</strong> @Model.Client.Address</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4" />
+
+<h4>🛒 Order Items</h4>
+
+<table class="table table-hover table-bordered text-center align-middle shadow-sm">
+    <thead class="table-light">
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    <img src="~/images/products/@item.Product.ImageName" width="80" class="rounded" />
+                </td>
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice $</td>
+                <td>@(item.Quantity * item.UnitPrice)$</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-end mt-4 me-2" style="max-width: 350px; float: right;">
+    <div class="border rounded p-3 bg-light shadow-sm">
+        <p class="mb-1"><strong>Subtotal:</strong> @subtotal $</p>
+        <p class="mb-1"><strong>Shipping Fee:</strong> @shippingFee $</p>
+        <hr />
+        <p class="fs-5"><strong>Total:</strong> @Model.TotalAmount.ToString("0.00") $</p>
+    </div>
+</div>
+
+
+@* Modal for update status *@
+
+<div class="modal fade" id="paymentStatusModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Update Payment Status</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" asp-controller="Orders" asp-action="Edit">
+                    <input type="hidden" asp-for="@Model.Id" />
+                    <input type="hidden" asp-for="@Model.orderStatus" />
+
+                    <label>Payment Status</label>
+                    <select class="form-select mb-2" asp-for="paymentStatus" asp-items="@ViewBag.PaymentStatusList">
+                    </select>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="orderStatusModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Update Order Status</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" asp-controller="Orders" asp-action="Edit">
+                    <input type="hidden" asp-for="@Model.Id" />
+                    <input type="hidden" asp-for="@Model.paymentStatus" />
+
+                    <label>Order Status</label>
+                    <select class="form-select mb-2" asp-for="orderStatus" asp-items="@ViewBag.OrderStatusList">
+                    </select>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="paymentDetailsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Payment Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <p style="white-space: pre-wrap; font-family: monospace">@Html.Raw(Model.PaymentDetails)</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

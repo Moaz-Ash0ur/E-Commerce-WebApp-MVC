@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ProductDetailsVM>
+
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["HomePage"] = true;
+}
+
+<div style="background: linear-gradient(to right, #08618d, #0e8bb5);">
+    <div class="container text-white py-5">
+        <div class="row align-items-center g-5">
+            <div class="col-md-6">
+                <h1 class="mb-5 display-2"><strong>M Store of Electronics</strong></h1>
+                <p>
+                    Find a large selection of newest electronic devices from most popular 
+                    brands and with affordable prices.
+                </p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="/images/hero4.png" class="img-fluid" alt="hero" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-light">
+    <div class="container py-4">
+
+        <div class="text-center mb-4">
+            <h2 class="display-5 fw-bold">Explore Our New Arrivals</h2>
+            <p class="text-muted fs-5">
+                Discover the latest in smartphones, laptops, printers, and more — handpicked from top brands just for you.
+            </p>
+        </div>
+
+        <h2 class="pb-4 text-center text-primary" style="font-size: 1.5rem;">
+            <i class="bi bi-stars me-2"></i> Latest Products
+        </h2>
+
+
+        @await Html.PartialAsync("_ProductBox", Model)
+
+
+    </div>
+</div>
+
+
+
+

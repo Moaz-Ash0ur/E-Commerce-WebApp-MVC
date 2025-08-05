@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ECommerceStore.DAL\ECommerceStore.DAL.csproj" />
+    <ProjectReference Include="..\ECommerceStore.Entities\ECommerceStore.Entities.csproj" />
+	  <PackageReference Include="sib_api_v3_sdk" Version="4.0.2" />
+
+  </ItemGroup>
+
+</Project>

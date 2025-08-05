@@ -1,0 +1,145 @@
+﻿@model List<CartItem>
+
+@{
+    ViewBag.Title = "Shopping Cart";
+    var total = Model.Sum(item => item.UnitPrice * item.Quantity);
+}
+
+<div class="row my-4">
+
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body">
+                <h4 class="mb-3">🛒 Shopping Cart</h4>
+                <hr />
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-warning alert-dismissible fade show mt-4" role="alert">
+                        <strong>@TempData["ErrorMessage"]</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <table class="table align-middle text-center">
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr data-row="@item.ProductId">
+                                <td style="width: 100px;">
+                                    <img src="~/images/products/@item.ImageName" width="80" class="rounded shadow-sm" alt="Product Image">
+                                </td>
+                                <td>
+                                    <h5 class="mb-1">@item.ProductName</h5>
+                                    <small class="text-muted">Price: @item.UnitPrice.ToString("C")</small>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary px-2" onclick="ChangeQty(@item.ProductId, -1, @item.UnitPrice)">-</button>
+                                        <span class="mx-2 fw-bold" id="qty-@item.ProductId">@item.Quantity</span>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary px-2" onclick="ChangeQty(@item.ProductId, 1, @item.UnitPrice)">+</button>
+                                    </div>
+                                </td>
+                                <td class="totalPrice fw-semibold text-success" data-id="@item.ProductId">
+                                    @((item.UnitPrice * item.Quantity).ToString("F2")) $
+                                </td>
+                                <td>
+                                    <i class="bi bi-trash-fill text-danger fs-5" role="button" onclick="RemoveCartItem(@item.ProductId)" title="Remove item"></i>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-4 p-3">
+            <h5 class="mb-3 text-center">🧾 Order Summary</h5>
+            <hr />
+            <div class="d-flex justify-content-between">
+                <span class="fw-bold">Total:</span>
+                <span class="fw-bold text-primary" id="OverAllTotal">@total.ToString("F2") $</span>
+            </div>
+
+            <div class="d-grid mt-4">
+                <a asp-action="Confirm" class="btn btn-success btn-lg">
+                    <i class="bi bi-credit-card"></i> Proceed to Checkout
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script>
+
+        function ChangeQty(productId, change, unitPrice) {
+
+             fetch(`/Cart/UpdateQuantity?productId=${productId}&change=${change}`, {
+                 method: 'POST'
+
+              }).then(res => {
+                 if (!res.ok) throw new Error("Failed to update quantity");
+                 return res.json();
+
+             }).then(data => {
+
+                 const qtyElement = document.getElementById(`qty-${productId}`);
+                 const totalElement = document.querySelector(`.totalPrice[data-id='${productId}']`);
+
+                 if (data.newQty > 0) {
+
+                     qtyElement.textContent = data.newQty;
+                     const itemTotal = unitPrice * data.newQty;
+                     totalElement.textContent = itemTotal.toFixed(2);
+                     document.getElementById("cart-count").textContent = data.count;
+
+                 } else {
+                    RemoveCartItem(productId);
+                 }
+
+                CalcOverAllTotal();
+             })
+             .catch(error => console.error(error));
+         }
+
+        function RemoveCartItem(productId){
+
+           fetch(`/Cart/Remove?productId=${productId}`, {
+                method: 'POST'
+
+              }).then(res => {
+                 if (!res.ok) throw new Error("Failed to remove quantity");
+                 return res.json();
+
+             }).then(data => {
+                 if(data.success){
+                 const row = document.querySelector(`[data-row='${productId}']`);
+                 if (row) row.remove();
+
+                  document.getElementById("cart-count").textContent = data.count;
+
+                  CalcOverAllTotal();
+
+                 }
+             }).catch(error => console.error(error));           
+         } 
+
+        function CalcOverAllTotal() {
+
+          let overAllTotal = 0;
+          document.querySelectorAll(".totalPrice").forEach(el => {
+                 overAllTotal += parseFloat(el.textContent);
+           });
+
+           document.getElementById("OverAllTotal").textContent = overAllTotal.toFixed(2);
+        
+        }
+
+
+    </script>
+}

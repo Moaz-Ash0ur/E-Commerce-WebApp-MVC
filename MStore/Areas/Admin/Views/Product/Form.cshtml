@@ -1,0 +1,70 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = Model.Id == 0 ? "Create Product" : "Edit Product";
+}
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-primary text-white">
+        <h5>@ViewData["Title"]</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="@(Model.Id == 0 ? "Create" : "Edit")" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImageName" />
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="form-label">Category</label>
+                <select asp-for="CategoryId" class="form-select" asp-items="@ViewBag.Categories">
+                    <option value="">-- Select Category --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BrandId" class="form-label">Brand</label>
+                <select asp-for="BrandId" class="form-select" asp-items="@ViewBag.Brands">
+                    <option value="">-- Select Brand --</option>
+                </select>
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Product Image</label>
+                <input type="file" name="ImageFile" class="form-control"/>
+                @if (!string.IsNullOrEmpty(Model.ImageName))
+                {
+                    <div class="mt-2">
+                        <img src="~/images/products/@Model.ImageName" width="100" class="img-thumbnail" />
+                    </div>
+                }
+            </div>
+
+
+            <button type="submit" class="btn btn-success">@ViewData["Title"]</button>
+            <a href="/Admin/Product" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" /> 
+}

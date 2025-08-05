@@ -1,0 +1,17 @@
+C:\Users\hp\source\repos\ECommerceStore.BLL\bin\Debug\net8.0\ECommerceStore.BLL.deps.json
+C:\Users\hp\source\repos\ECommerceStore.BLL\bin\Debug\net8.0\ECommerceStore.BLL.dll
+C:\Users\hp\source\repos\ECommerceStore.BLL\bin\Debug\net8.0\ECommerceStore.BLL.pdb
+C:\Users\hp\source\repos\ECommerceStore.BLL\bin\Debug\net8.0\ECommerceStore.DAL.dll
+C:\Users\hp\source\repos\ECommerceStore.BLL\bin\Debug\net8.0\ECommerceStore.Entities.dll
+C:\Users\hp\source\repos\ECommerceStore.BLL\bin\Debug\net8.0\ECommerceStore.DAL.pdb
+C:\Users\hp\source\repos\ECommerceStore.BLL\bin\Debug\net8.0\ECommerceStore.Entities.pdb
+C:\Users\hp\source\repos\ECommerceStore.BLL\obj\Debug\net8.0\ECommerceStore.BLL.csproj.AssemblyReference.cache
+C:\Users\hp\source\repos\ECommerceStore.BLL\obj\Debug\net8.0\ECommerceStore.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\source\repos\ECommerceStore.BLL\obj\Debug\net8.0\ECommerceStore.BLL.AssemblyInfoInputs.cache
+C:\Users\hp\source\repos\ECommerceStore.BLL\obj\Debug\net8.0\ECommerceStore.BLL.AssemblyInfo.cs
+C:\Users\hp\source\repos\ECommerceStore.BLL\obj\Debug\net8.0\ECommerceStore.BLL.csproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\ECommerceStore.BLL\obj\Debug\net8.0\ECommerc.511B8E73.Up2Date
+C:\Users\hp\source\repos\ECommerceStore.BLL\obj\Debug\net8.0\ECommerceStore.BLL.dll
+C:\Users\hp\source\repos\ECommerceStore.BLL\obj\Debug\net8.0\refint\ECommerceStore.BLL.dll
+C:\Users\hp\source\repos\ECommerceStore.BLL\obj\Debug\net8.0\ECommerceStore.BLL.pdb
+C:\Users\hp\source\repos\ECommerceStore.BLL\obj\Debug\net8.0\ref\ECommerceStore.BLL.dll

@@ -1,0 +1,49 @@
+﻿@model CheckOutVm
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<div class="container mt-5">
+    <div class="card shadow rounded p-4">
+        <h2 class="mb-4 text-center text-primary">📦 Confirm Your Order</h2>
+
+        <form asp-action="ConfirmOrder" method="post" novalidate>
+            <div class="mb-3">
+                <label asp-for="DeliveryAddress" class="form-label fw-bold">📍 Delivery Address</label>
+                <textarea asp-for="DeliveryAddress" class="form-control" rows="3" placeholder="Enter the full delivery address..."></textarea>
+                <span asp-validation-for="DeliveryAddress" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="paymentMethod" class="form-label fw-bold">💳 Payment Method</label>
+                <select asp-for="paymentMethod" class="form-select" asp-items="@ViewBag.PaymentMethodList">
+                    <option disabled selected>-- Select payment method --</option>
+                </select>
+                <span asp-validation-for="paymentMethod" class="text-danger small"></span>
+            </div>
+
+            <hr />
+
+            <div class="bg-light p-3 rounded mb-4">
+                <h5>🧾 Order Summary</h5>
+                <p><strong>Subtotal:</strong> <span class="text-secondary">@ViewBag.SubTotal $</span></p>
+                <p><strong>Shipping:</strong> <span class="text-secondary">@ResGeneral.ShippingFee $</span></p>
+                <p><strong>Total:</strong> <span class="fw-bold text-primary">@ViewBag.TotalPrice $</span></p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a asp-controller="Cart" asp-action="Index" class="btn btn-outline-secondary">
+                    🔙 Back to Cart
+                </a>
+
+                <button type="submit" class="btn btn-success px-4">
+                    ✅ Confirm
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

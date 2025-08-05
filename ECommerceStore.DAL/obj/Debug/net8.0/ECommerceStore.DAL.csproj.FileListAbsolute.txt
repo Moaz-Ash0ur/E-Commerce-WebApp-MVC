@@ -1,0 +1,17 @@
+C:\Users\hp\source\repos\ECommerceStore.DAL\bin\Debug\net8.0\ECommerceStore.DAL.deps.json
+C:\Users\hp\source\repos\ECommerceStore.DAL\bin\Debug\net8.0\ECommerceStore.DAL.runtimeconfig.json
+C:\Users\hp\source\repos\ECommerceStore.DAL\bin\Debug\net8.0\ECommerceStore.DAL.dll
+C:\Users\hp\source\repos\ECommerceStore.DAL\bin\Debug\net8.0\ECommerceStore.DAL.pdb
+C:\Users\hp\source\repos\ECommerceStore.DAL\bin\Debug\net8.0\ECommerceStore.Entities.dll
+C:\Users\hp\source\repos\ECommerceStore.DAL\bin\Debug\net8.0\ECommerceStore.Entities.pdb
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\ECommerceStore.DAL.csproj.AssemblyReference.cache
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\ECommerceStore.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\ECommerceStore.DAL.AssemblyInfoInputs.cache
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\ECommerceStore.DAL.AssemblyInfo.cs
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\ECommerceStore.DAL.csproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\ECommerc.9265A32C.Up2Date
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\ECommerceStore.DAL.dll
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\refint\ECommerceStore.DAL.dll
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\ECommerceStore.DAL.pdb
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\ECommerceStore.DAL.genruntimeconfig.cache
+C:\Users\hp\source\repos\ECommerceStore.DAL\obj\Debug\net8.0\ref\ECommerceStore.DAL.dll
