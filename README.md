@@ -1,50 +1,87 @@
-E-Commerce Web App
+🛒 E-Commerce Web App
+📌 Overview
 
-الفكرة العامة :
+A full-stack E-Commerce web application built with ASP.NET Core MVC using a clean architecture approach.
+The app allows users to:
 
- المستخدم يقدر يتصفح المنتجات،ويضيفها للسلة وإتمام الطلبات ويستعرضها يشوف بيناته الشخصية مع امكانية التعديل عليها وميزات اضافية
+Browse products & categories
 
- كانت فكرة جديدة وبيزنس جديد ف التعامل معه وتم تنفيذه الحمدلله 
+Add items to cart (AJAX based)
 
- المعمارية 
+Place & manage orders
 
-✅ ASP.NET Core MVC
-✅ N-Tier Architecture (Presentation Layer - BLL - DAL - Entities)
-✅ Repository Pattern
-✅ SOLID Principles
-✅ Clean Code & Reusable Components
-✅ Code-First Approach with EF Core
+View & update profile information
 
-Frontend: 
-HTML, CSS, Bootstrap معرفتي الاساسية ف 
+Benefit from advanced features such as authentication, role-based authorization, and order tracking.
 
-واستخدمت معها AI Tools لتعديل والتحسين حاولت استغل هادا الاشي كاني بتعامل مع فرونت ايند | كنت اخد اعمل جزء من التصميم واحسن مع AI واخدو جاهز ك 
-template وابدا اعدل عليه مثلا اضيف Tag Helper اخد جزء منة واعمل فيه partial view وهكذا
+This project was a new business idea and a complete end-to-end implementation.
 
-JavaScript ودورها القوي
-تحسين تجربة المستخدم بـ AJAX Calls باستخدام Fetch API 
+🏗️ Architecture & Design
 
- Backend (ASP.NET Core MVC): 
+ASP.NET Core MVC
 
-EF Core + LINQ لاستعلامات فعالة ومحسّنة
-CRUD Operations للمنتجات، الفئات، المستخدمين، والطلبات
-لوحة تحكم إدارية (Admin Panel) لإدارة المحتوى
-Dashboard لعرض الإحصائيات : عدد المبيعات، الطلبات، المستخدمين
-عرفت كيف اتعامل مع داشبورد اخدت شارت جاهز وعملت كويري ع داتا ومن خلالها ارسلت البيانات ف شارت وبناء عليها ظهرت الاحصائيات تجربة جديدة وفكرة جدية كانت
+N-Tier Architecture (Presentation Layer, BLL, DAL, Entities)
 
-ASP.NET Identity
-ادارة المستخدمين وصلاحياتهم لتسجيل الدخول انشاء حساب وتحديث كلمة المرور اعادة تعين كملة المرور عن طريق ارسال ايميل باستخدام ApiKey from Brevo
-ادارة الصلاحيات Authorization / Authentication 
+Repository Pattern
 
-Features 
+SOLID Principles & Clean Code
 
-Business Logic لإدارة السلة: (Add / Update / Remove باستخدام AJAX)
-استخدام Cookies لحفظ سلة التسوق
-تحسين الأداء وتجربة المستخدم من خلال تقليل عدد الـ Requests الكاملة
+Reusable Components
 
-Validations:
-Client-side
-Server-side
-Remote Validation
-رفع الصور مع التحقق من النوع والحجم وتأمين العملية
-البحث عن المنتجات (Search) + تقسيم الصفحات (Pagination) باستخدام AJAX
+EF Core (Code-First) with LINQ queries
+
+🎨 Frontend
+
+HTML, CSS, Bootstrap (UI templates improved/customized using AI tools)
+
+Partial Views & Tag Helpers for reusable UI components
+
+JavaScript + Fetch API for AJAX calls (cart updates, search, pagination)
+
+Responsive and modern UI/UX
+
+⚙️ Backend
+
+CRUD Operations for products, categories, users, orders
+
+Admin Panel (Dashboard) for managing content & analytics
+
+Sales statistics, orders, and users count displayed using charts (data retrieved with LINQ queries)
+
+ASP.NET Identity for authentication & authorization
+
+User registration, login, update password
+
+Password reset via email (SMTP API Key – Brevo)
+
+Role-based access control
+
+🚀 Features
+
+🛒 Shopping Cart Management (Add / Update / Remove) with AJAX
+
+🍪 Cookies used to persist cart items across sessions
+
+⚡ Optimized user experience by reducing full-page reloads
+
+✅ Validation
+
+Client-side & server-side (Data Annotations, Remote Validation)
+
+📂 File Upload (product images) with type & size validation + secured upload process
+
+🔍 Product Search & Pagination (AJAX-based)
+
+📊 Dashboard Analytics (charts integrated with live DB queries)
+
+🔧 Tech Stack
+
+Backend: ASP.NET Core MVC, EF Core, LINQ
+
+Frontend: HTML, CSS, Bootstrap, JavaScript, AJAX (Fetch API)
+
+Database: SQL Server (Code-First Migrations)
+
+Identity & Security: ASP.NET Identity, Role-Based Authorization, Brevo Email API
+
+Tools & Practices: Repository Pattern, SOLID, Clean Code, N-Tier Architecture
