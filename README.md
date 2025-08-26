@@ -1,7 +1,7 @@
 🛒 E-Commerce Web App
 📌 Overview
 
-A full-stack E-Commerce web application built with ASP.NET Core MVC using a clean architecture approach.
+A full-stack E-Commerce web application built with ASP.NET Core MVC using a N architecture approach.
 The app allows users to:
 
 Browse products & categories
